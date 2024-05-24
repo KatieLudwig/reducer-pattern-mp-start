@@ -62,12 +62,13 @@ const reducer = (state, action) => {
     case SET_HIGHLIGHTED_QUOTE:
       return { 
         ... state,
-        highlightedQuote: action.payload
+        highlightedQuote: action.payload === state.highlightedQuote
+        ? null : action.payload
        }
     case TOGGLE_VISIBILITY:
       return { 
         ... state,
-        dsplayAllQuotes:!state.dsplayAllQuotes
+        dsplayAllQuotes: !state.dsplayAllQuotes
        }
     default:
       return state
@@ -112,6 +113,7 @@ export default function App() {
         editQuoteAuthenticity={editQuoteAuthenticity}
         setHighlightedQuote={setHighlightedQuote}
         toggleVisibility={toggleVisibility}
+        displayAllQuotes={state.dsplayAllQuotes}
       />
       <QuoteForm
         createQuote={createQuote}
